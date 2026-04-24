@@ -1,0 +1,18 @@
+[package]
+name = "ep-audio"
+version.workspace = true
+edition.workspace = true
+authors.workspace = true
+license.workspace = true
+
+[dependencies]
+ep-core = { path = "../ep-core" }
+tokio = { workspace = true }
+# cpal = { workspace = true }
+# rodio = { workspace = true }
+hound = { workspace = true }
+thiserror = { workspace = true }
+tracing = { workspace = true }
+
+[dev-dependencies]
+tokio-test = { workspace = true }

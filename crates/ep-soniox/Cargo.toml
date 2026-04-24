@@ -1,0 +1,22 @@
+[package]
+name = "ep-soniox"
+version.workspace = true
+edition.workspace = true
+authors.workspace = true
+license.workspace = true
+
+[dependencies]
+ep-core = { path = "../ep-core" }
+tokio = { workspace = true }
+tokio-util = { workspace = true }
+futures = { workspace = true }
+# reqwest = { workspace = true }
+# tokio-tungstenite = { workspace = true }
+# http = { workspace = true }
+serde = { workspace = true }
+serde_json = { workspace = true }
+thiserror = { workspace = true }
+tracing = { workspace = true }
+
+[dev-dependencies]
+tokio-test = { workspace = true }

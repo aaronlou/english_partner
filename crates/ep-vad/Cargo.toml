@@ -1,0 +1,18 @@
+[package]
+name = "ep-vad"
+version.workspace = true
+edition.workspace = true
+authors.workspace = true
+license.workspace = true
+
+[dependencies]
+ep-core = { path = "../ep-core" }
+tokio = { workspace = true }
+thiserror = { workspace = true }
+tracing = { workspace = true }
+
+# TODO: webrtc-vad or custom VAD implementation
+# webrtc-vad = "0.4"
+
+[dev-dependencies]
+tokio-test = { workspace = true }
