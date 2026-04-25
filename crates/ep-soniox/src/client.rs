@@ -1,15 +1,14 @@
 //! HTTP client configuration for Soniox API.
 
-// TODO: replace with reqwest::Client once edition2024 compatibility is resolved
-// use reqwest::Client;
+use reqwest::Client;
 
 const DEFAULT_BASE_URL: &str = "https://api.soniox.com";
-const DEFAULT_WS_URL: &str = "wss://tts-rt.soniox.com/generate-websocket";
+const DEFAULT_TTS_WS_URL: &str = "wss://tts-rt.soniox.com/generate-websocket";
 const DEFAULT_STT_WS_URL: &str = "wss://stt-rt.soniox.com/transcribe-websocket";
 
 pub struct SonioxClient {
     pub api_key: String,
-    // pub http: Client,
+    pub http: Client,
     pub base_url: String,
     pub tts_ws_url: String,
     pub stt_ws_url: String,
@@ -19,9 +18,9 @@ impl SonioxClient {
     pub fn new(api_key: impl Into<String>) -> Self {
         Self {
             api_key: api_key.into(),
-            // http: Client::new(),
+            http: Client::new(),
             base_url: DEFAULT_BASE_URL.to_string(),
-            tts_ws_url: DEFAULT_WS_URL.to_string(),
+            tts_ws_url: DEFAULT_TTS_WS_URL.to_string(),
             stt_ws_url: DEFAULT_STT_WS_URL.to_string(),
         }
     }

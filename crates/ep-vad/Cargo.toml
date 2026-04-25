@@ -11,8 +11,5 @@ tokio = { workspace = true }
 thiserror = { workspace = true }
 tracing = { workspace = true }
 
-# TODO: webrtc-vad or custom VAD implementation
-# webrtc-vad = "0.4"
-
 [dev-dependencies]
 tokio-test = { workspace = true }

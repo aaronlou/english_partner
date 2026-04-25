@@ -7,12 +7,14 @@ license.workspace = true
 
 [dependencies]
 ep-core = { path = "../ep-core" }
+ep-vad = { path = "../ep-vad" }
 tokio = { workspace = true }
-# cpal = { workspace = true }
-# rodio = { workspace = true }
+cpal = { workspace = true }
+rodio = { workspace = true }
 hound = { workspace = true }
 thiserror = { workspace = true }
 tracing = { workspace = true }
+anyhow = { workspace = true }
 
 [dev-dependencies]
 tokio-test = { workspace = true }

@@ -4,6 +4,7 @@ members = [
     "crates/ep-audio",
     "crates/ep-soniox",
     "crates/ep-vad",
+    "crates/ep-volcengine",
     "crates/ep-app",
 ]
 resolver = "2"
@@ -21,10 +22,10 @@ tokio = { version = "1.43", features = ["full"] }
 tokio-util = { version = "0.7", features = ["codec"] }
 futures = "0.3"
 
-# HTTP / WebSocket (TODO: resolve edition2024 compatibility)
-# reqwest = { version = "0.12", features = ["json", "rustls-tls", "stream"] }
-# tokio-tungstenite = { version = "0.26", features = ["rustls-tls-webpki-roots"] }
-# http = "1.2"
+# HTTP / WebSocket
+reqwest = { version = "0.12", features = ["json", "rustls-tls", "stream"] }
+tokio-tungstenite = { version = "0.26", features = ["rustls-tls-webpki-roots"] }
+http = "1.2"
 
 # Serialization
 serde = { version = "1.0", features = ["derive"] }
@@ -36,14 +37,15 @@ anyhow = "1.0"
 tracing = "0.1"
 tracing-subscriber = { version = "0.3", features = ["env-filter"] }
 
-# Audio (TODO: pin coreaudio-sys compatible version)
-# cpal = "0.15"
-# rodio = "0.20"
+# Audio
+cpal = "0.15"
+rodio = "0.20"
 hound = "3.5"
 
 # Protobuf / gRPC
 prost = "0.13"
 tonic = "0.12"
+tonic-build = "0.12"
 
 # Testing
 tokio-test = "0.4"

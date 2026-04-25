@@ -1,0 +1,84 @@
+syntax = "proto3";
+
+package ep.v1;
+
+// ---------------------------------------------------------------------------
+// Audio types
+// ---------------------------------------------------------------------------
+
+message AudioChunk {
+  // Raw PCM data (mono, 16-bit, little-endian).
+  bytes pcm_data = 1;
+  // Sample rate in Hz (typically 16000).
+  uint32 sample_rate = 2;
+  // Capture timestamp in milliseconds.
+  uint64 timestamp_ms = 3;
+}
+
+// ---------------------------------------------------------------------------
+// Transcript types
+// ---------------------------------------------------------------------------
+
+message TranscriptEvent {
+  // Recognized text.
+  string text = 1;
+  // True when the utterance is complete.
+  bool is_final = 2;
+  // Confidence score [0.0, 1.0].
+  float confidence = 3;
+}
+
+// ---------------------------------------------------------------------------
+// Conversation service
+// ---------------------------------------------------------------------------
+
+message StartRequest {
+  string scenario_id = 1;
+}
+
+message StartResponse {
+  string session_id = 1;
+  string ai_text = 2;
+  // AI opening audio (WAV format).
+  bytes audio_wav = 3;
+}
+
+message TurnRequest {
+  string session_id = 1;
+  // Student audio (WAV format).
+  bytes audio_wav = 2;
+}
+
+message TurnResponse {
+  // What the student said.
+  string transcript = 1;
+  // AI reply text.
+  string ai_text = 2;
+  // AI reply audio (WAV format).
+  bytes audio_wav = 3;
+}
+
+// Health / metadata
+message HealthRequest {}
+
+message HealthResponse {
+  string status = 1;
+  string provider = 2;
+  bool provider_connected = 3;
+}
+
+service ConversationService {
+  // Start a new scenario and receive the AI opening.
+  rpc StartScenario(StartRequest) returns (StartResponse);
+
+  // Process one turn: student audio in -> AI response out.
+  rpc ConversationTurn(TurnRequest) returns (TurnResponse);
+
+  // Real-time streaming: bidirectional audio <-> transcript stream.
+  // Rust (client) streams AudioChunk up;
+  // Python (server) streams TranscriptEvent down.
+  rpc StreamAudio(stream AudioChunk) returns (stream TranscriptEvent);
+
+  // Health check.
+  rpc Health(HealthRequest) returns (HealthResponse);
+}
